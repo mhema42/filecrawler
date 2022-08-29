@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 public class filecrawler {
 	
-	public static void main(String[] args) {
-		String path = ("./");
-		
+	public static void main(String[] args) {	
 		Scanner inp = new Scanner(System.in);
 		System.out.print("Enter searchtext - ");  
 		String searchText= inp.next();
@@ -17,7 +15,12 @@ public class filecrawler {
 			inp.close();
 		}
 		
-		loopFiles(path, searchText);
+		try {
+			String startingFolder = ("./");
+			loopFiles(startingFolder, searchText);
+		} catch (Exception e) {
+			System.out.println("sorry, folder does not exist");
+		}
 	}
 		
 	private static void loopFiles(String path, String searchText) {
@@ -48,7 +51,7 @@ public class filecrawler {
 				String text = (scanner.nextLine());
 				boolean val = text.contains(searchText);
 				if(val) {
-					System.out.println(path);
+					System.out.println(file.getAbsolutePath());
 					return;
 				}
 			}
