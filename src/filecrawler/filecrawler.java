@@ -16,12 +16,21 @@ public class filecrawler {
 		if (inp != null) {
 			inp.close();
 		}
-		
-		readFile("c:\\filecrawler\\röd.txt", searchText);	
+					
+		File[] files = new File("./").listFiles();
+		String path = null;
+	
+		for (File file : files) {
+		    if (file.isFile()) {
+		    	path = (file.getAbsolutePath());
+		    	readFile(path, searchText);	
+		    }
+		}		
 	}
 	
 	private static void readFile(String filepath, String searchText) {
 		File file = new File(filepath);
+		String filePath = file.getAbsolutePath();
 		Scanner scanner = null;
 		
 		try {
@@ -30,7 +39,8 @@ public class filecrawler {
 				String text = (scanner.nextLine());
 				boolean val = text.contains(searchText);
 				if(val) {
-					System.out.println(filepath);
+					System.out.println(filePath);
+					return;
 				}
 			}
 		} catch (FileNotFoundException e) {
